@@ -1,4 +1,3 @@
-# LPPA 2020 Connect 4
-
-## View online
-[Connect Four](https://faustoazzaretti.github.io/connectFour/)
+# Project name
+Give it a try
+https://faustoazzaretti.github.io/four-in-line/
