@@ -3,7 +3,6 @@
 // var status = 'ready'; // 'ready', 'p1Turn', 'p2Turn', 'p1Win', 'p2Win'
 var boardHTML = null
 var columnsHTML = null
-
 var turn = 'yellow'
 var board = [
     [null, null, null, null, null, null],
@@ -21,7 +20,8 @@ var win = function () {
             if (board[i][j] != null) {
                 if (board[i][j] === (board[i + 1][j]) && board[i][j] === (board[i + 2][j]) && board[i][j] === (board[i + 3][j])) {
                     alert('Gano el color: ' + board[i][j])
-                    break
+                    //setTimeout(alert(winMessage + board[i][j]), 1500)
+                    //restart()
                 }
             }
         }
@@ -31,16 +31,30 @@ var win = function () {
             if (board[i][j] != null) {
                 if (board[i][j] === (board[i][j + 1]) && board[i][j] === (board[i][j + 2]) && board[i][j] === (board[i][j + 3])) {
                     alert('Gano el color: ' + board[i][j])
-                    break
+                    //setTimeout(alert(winMessage), 1500)
+                    //restart()
+                    console.log(board[i][j + 3])
                 }
             }
         }
     }
-    console.log(board)
-
+    for (var i = 0; i < board.length; i++) {
+        for (var j = board[i].length - 1; j >= 0; j--) {
+            if (board[i][j] != null) {
+                if (board[i][j] === (board[i + 1][j + 1]) && board[i][j] === (board[i + 2][j + 2]) && board[i][j] === (board[i + 3][j + 3])) {
+                    alert('Gano el color: ' + board[i][j])
+                    //setTimeout(alert(winMessage + board[i][j]), 1500)
+                }
+            }
+        }
+    }
 }
 
-
+var startChangeColor = function () {
+    if (start) {
+        boardHTML.style.backgroundColor = 'grey';
+    }
+}
 
 var toggleTurn = function () {
     turn = (turn === 'yellow') ? 'red' : 'yellow'
@@ -56,6 +70,7 @@ var columnEventHandler = function (evt) {
             break
         }
     }
+
 }
 
 var bindColumnHandlers = function () {
@@ -63,7 +78,19 @@ var bindColumnHandlers = function () {
     for (var i = 0; i < columnsHTML.length; i++) {
         columnsHTML[i].onclick = columnEventHandler
     }
+}
 
+var restart = function () {
+    board = [
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null]
+    ]
+    render()
 }
 
 var render = function () {
@@ -80,13 +107,16 @@ var render = function () {
     boardHTML.innerHTML = html
     bindColumnHandlers()
     win()
+
 }
 
 var init = function () {
     boardHTML = document.getElementById('board')
+    column = document.getElementsByClassName('column')
     turn = Math.random() > 0.5 ? 'yellow' : 'red'
+    start = true;
     render()
-
+    startChangeColor()
 }
 
 window.onload = init
