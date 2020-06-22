@@ -21,6 +21,7 @@ var win = function () {
                 if (board[i][j] === (board[i + 1][j]) && board[i][j] === (board[i + 2][j]) && board[i][j] === (board[i + 3][j])) {
                     alert('Gano el color: ' + board[i][j])
                     //setTimeout(alert(winMessage + board[i][j]), 1500)
+                    //board[i][j] = 'black'
                     //restart()
                 }
             }
@@ -33,7 +34,7 @@ var win = function () {
                     alert('Gano el color: ' + board[i][j])
                     //setTimeout(alert(winMessage), 1500)
                     //restart()
-                    console.log(board[i][j + 3])
+                    //console.log(board[i][j + 3])
                 }
             }
         }
@@ -47,6 +48,20 @@ var win = function () {
                 }
             }
         }
+    }
+    for (var i = board.length; i <= 0; i--) {
+        for (var j = 0; j >= board[i].length - 1; j++) {
+            if (board[i][j] != null) {
+                console.log(board[i][j])
+                if (board[i][j] === (board[i - 1][j + 1])) {
+                    alert('Gano el color: ' + board[i][j])
+                    //setTimeout(alert(winMessage + board[i][j]), 1500)
+                    //board[i][j] = 'black'
+                    //restart()
+                }
+            }
+        }
+
     }
 }
 
@@ -70,7 +85,6 @@ var columnEventHandler = function (evt) {
             break
         }
     }
-
 }
 
 var bindColumnHandlers = function () {
@@ -107,12 +121,27 @@ var render = function () {
     boardHTML.innerHTML = html
     bindColumnHandlers()
     win()
-
 }
+
+function welcome() {
+    var mensaje;
+    var name = prompt("Introduzca su nombre:");
+
+    if (name == null || name == "") {
+        var name = prompt("Introduzca su nombre:");
+    } else {
+        mensaje = name;
+    }
+    you.innerHTML = mensaje;
+    console.log(you)
+}
+
+
 
 var init = function () {
     boardHTML = document.getElementById('board')
     column = document.getElementsByClassName('column')
+    you = document.getElementById('you')
     turn = Math.random() > 0.5 ? 'yellow' : 'red'
     start = true;
     render()

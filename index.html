@@ -14,10 +14,10 @@
             <div class="header"><a href="#">&larr; Back</a></div>
             <div class="menu">
                 <ul>
-                    <li>START</li>
-                    <li>RESTART</li>
-                    <li>HOW TO PLAY?</li>
-                    <li>CONTACT</li>
+                    <li onclick="welcome()">START</li>
+                    <li onclick="restart()">RESTART</li>
+                    <li><a href="https://www.yucata.de/en/Rules/Four" target="blank">HOW TO PLAY?</a></li>
+                    <li><a href="https://faustoazzaretti.github.io/lppa-parcial-1/" target="blank">CONTACT</a></li>
                 </ul>
             </div>
             <div class="game">
@@ -25,7 +25,7 @@
                 <div class="ribbon"></div>
                 <div class="players">
                     <div class="spot yellow"></div>
-                    <div class="player p1">You</div>
+                    <div id='you' class="player p1">You</div>
                     <div class="direction left"></div>
                     <div class="direction text">GO!</div>
                     <div class="direction right"></div>
