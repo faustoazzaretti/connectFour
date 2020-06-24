@@ -2,6 +2,7 @@
 // var player2 = { name: 'AI (Easy)', color: 'red' };
 // var status = 'ready'; // 'ready', 'p1Turn', 'p2Turn', 'p1Win', 'p2Win'
 var boardHTML = null
+var winnerMsj = ''
 var columnsHTML = null
 var turn = 'yellow'
 var board = [
@@ -15,61 +16,49 @@ var board = [
 ]
 
 var win = function () {
+    //win horizontal
     for (var i = 0; i < board.length; i++) {
         for (var j = board[i].length - 1; j >= 0; j--) {
             if (board[i][j] != null) {
                 if (board[i][j] === (board[i + 1][j]) && board[i][j] === (board[i + 2][j]) && board[i][j] === (board[i + 3][j])) {
-                    alert('Gano el color: ' + board[i][j])
-                    //setTimeout(alert(winMessage + board[i][j]), 1500)
-                    //board[i][j] = 'black'
-                    //restart()
+                    winnerMsj.innerHTML = "El ganador es: " + board[i][j]
+                    setTimeout(restart, 2000)
+
                 }
             }
         }
     }
+    //win vertical
     for (var i = 0; i < board.length; i++) {
         for (var j = board[i].length - 1; j >= 0; j--) {
             if (board[i][j] != null) {
                 if (board[i][j] === (board[i][j + 1]) && board[i][j] === (board[i][j + 2]) && board[i][j] === (board[i][j + 3])) {
-                    alert('Gano el color: ' + board[i][j])
-                    //setTimeout(alert(winMessage), 1500)
+                    winnerMsj.innerHTML = "El ganador es: " + board[i][j]
+                    setTimeout(restart, 2000)
                     //restart()
                     //console.log(board[i][j + 3])
                 }
             }
         }
     }
+    //win diagonal
     for (var i = 0; i < board.length; i++) {
         for (var j = board[i].length - 1; j >= 0; j--) {
             if (board[i][j] != null) {
                 if (board[i][j] === (board[i + 1][j + 1]) && board[i][j] === (board[i + 2][j + 2]) && board[i][j] === (board[i + 3][j + 3])) {
-                    alert('Gano el color: ' + board[i][j])
-                    //setTimeout(alert(winMessage + board[i][j]), 1500)
+                    winnerMsj.innerHTML = "El ganador es: " + board[i][j]
+                    setTimeout(restart, 2000)
                 }
             }
         }
     }
-    for (var i = board.length; i <= 0; i--) {
-        for (var j = 0; j >= board[i].length - 1; j++) {
-            if (board[i][j] != null) {
-                console.log(board[i][j])
-                if (board[i][j] === (board[i - 1][j + 1])) {
-                    alert('Gano el color: ' + board[i][j])
-                    //setTimeout(alert(winMessage + board[i][j]), 1500)
-                    //board[i][j] = 'black'
-                    //restart()
-                }
-            }
-        }
-
-    }
 }
 
-var startChangeColor = function () {
-    if (start) {
-        boardHTML.style.backgroundColor = 'grey';
-    }
-}
+// var startChangeColor = function () {
+//     if (start) {
+//         boardHTML.style.backgroundColor = 'grey';
+//     }
+// }
 
 var toggleTurn = function () {
     turn = (turn === 'yellow') ? 'red' : 'yellow'
@@ -104,6 +93,7 @@ var restart = function () {
         [null, null, null, null, null, null],
         [null, null, null, null, null, null]
     ]
+    winnerMsj.innerHTML = ''
     render()
 }
 
@@ -133,7 +123,7 @@ function welcome() {
         mensaje = name;
     }
     you.innerHTML = mensaje;
-    console.log(you)
+    //console.log(you)
 }
 
 
@@ -142,10 +132,11 @@ var init = function () {
     boardHTML = document.getElementById('board')
     column = document.getElementsByClassName('column')
     you = document.getElementById('you')
+    winnerMsj = document.getElementById('winner')
     turn = Math.random() > 0.5 ? 'yellow' : 'red'
-    start = true;
+    //start = true;
     render()
-    startChangeColor()
+    //startChangeColor()
 }
 
 window.onload = init

@@ -183,6 +183,12 @@ a:visited {
 }
 */
 
+#winner {
+    font-size: 45px;
+    font-weight: bold;
+
+}
+
 .footer {
     display: flex;
     flex-direction: row;
