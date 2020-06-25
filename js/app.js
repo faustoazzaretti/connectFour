@@ -133,6 +133,10 @@ var init = function () {
     column = document.getElementsByClassName('column')
     you = document.getElementById('you')
     winnerMsj = document.getElementById('winner')
+    start = document.getElementById('start')
+    fRestart = document.getElementById('restart')
+    start.onclick = welcome
+    fRestart.onclick = restart
     turn = Math.random() > 0.5 ? 'yellow' : 'red'
     //start = true;
     render()
